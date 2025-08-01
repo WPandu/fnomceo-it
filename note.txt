@@ -1,0 +1,32 @@
+About a year ago you've already collected data from this page, but we need update now.
+You'll find description below:
+
+We would like to collect data of Italian doctors from the fnomceo.it page.
+
+Here is the search field => https://portale.fnomceo.it/cerca-prof/index.php
+
+To get results you have to use phrases from the spreadsheet in “Cognome” field and click “Cerca” button => https://docs.google.com/spreadsheets/d/1d8Rsm8GSA2ULUbIGaAlAtM9GW2rfmYXNzlZOUSsH4pI/edit?usp=sharing
+
+We need data for each doctor from each listing page of results => https://monosnap.com/file/xQ9c1f4sByAgdShNPon7LssnEKKwZw
+
+Here is what we need for each doctor =>
+https://monosnap.com/file/JAsbd8Efc083t6XnsPlxLsej84lkvm
+https://monosnap.com/file/Nn6pux0Z7qIvQ9cXT5h5YGIlksEZwL
+
+I think it should give us about 450k records.
+
+Data of all doctors have to be collected in the Excel spreadsheet.
+
+https://portale.fnomceo.it/cerca-prof/dettaglio.php [POST]
+id: 195978 (Form Data)
+
+
+https://portale.fnomceo.it/cerca-prof/elenco.php [POST]
+cognome: Ferrari
+nome
+dataNascita
+provinciaLabel
+provincia
+recaptcha_response: 
+6LfgMNMUAAAAAJ69NE3zlhMR82suis1K6A1V4p4J
+https://portale.fnomceo.it/cerca-prof/index.php
