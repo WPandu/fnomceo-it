@@ -116,32 +116,38 @@ class Scraper:
             surname_text = self.driver.find_element(By.ID, "cognomeID")
             surname_text.send_keys(surname)
             submit_button = self.driver.find_element(By.ID, "submitButtonID")
+            # After submit_button.click()
             submit_button.click()
-            # Find specific network request
-            for request in self.driver.requests:
-                if request.response and "elenco.php" in request.url:
-                    html = request.response.body.decode('utf-8', errors='replace')
-                     # Parse with BeautifulSoup
-                    soup = BeautifulSoup(html, "html.parser")
+            time.sleep(1)  # Optional short wait before checking requests
 
-                    if not soup:
+            elenco_html = None
+            start_time = time.time()
+            timeout = 10  # seconds
+
+            while time.time() - start_time < timeout:
+                for request in reversed(self.driver.requests):
+                    if request.response and "elenco.php" in request.url:
+                        elenco_html = request.response.body.decode('utf-8', errors='replace')
                         break
-                    # Find the table by ID or class
-                    table = soup.find("table", {"id": "dataTableID"})
-                    if not table:
-                        break
+                if elenco_html:
+                    break
+                time.sleep(0.5)  # Wait and retry
+
+            if elenco_html:
+                soup = BeautifulSoup(elenco_html, "html.parser")
+                table = soup.find("table", {"id": "dataTableID"})
+                if table:
                     rows = table.find("tbody").find_all("tr")
-
                     for row in rows:
                         tds = row.find_all("td")
                         if len(tds) < 1:
                             continue
-                        id = row.find("td")
-                        if id:
+                        id_cell = row.find("td")
+                        if id_cell:
                             self.result_ids.append({
-                                "id": id.get_text(strip=True),
+                                "id": id_cell.get_text(strip=True),
                                 "surname": surname,
-                        })
+                            })
     def start_get_detail(self):
         self.ids = self.get_ids()
         
