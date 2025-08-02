@@ -57,8 +57,8 @@ class Scraper:
     def get_driver_wire(self):
         options = Options()
         options.add_argument("--start-maximized")
-        options.add_argument("--headless")  # 👉 Run browser in headless mode
-        options.add_argument("--disable-gpu")  # Optional: helps on Windows
+        #options.add_argument("--headless")  # 👉 Run browser in headless mode
+        #options.add_argument("--disable-gpu")  # Optional: helps on Windows
         options.add_argument("--window-size=1920,1080")  # Optional: simulate full HD
 
         driver = webdriver.Chrome(options=options)
