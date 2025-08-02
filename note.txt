@@ -30,3 +30,5 @@ provincia
 recaptcha_response: 
 6LfgMNMUAAAAAJ69NE3zlhMR82suis1K6A1V4p4J
 https://portale.fnomceo.it/cerca-prof/index.php
+
+ruff check main.py --select F401 --fix

@@ -1,17 +1,10 @@
 import pandas as pd
 import openpyxl
 from seleniumwire import webdriver
-#from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium_driverless.sync import webdriver as webdriverless
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import TimeoutException, StaleElementReferenceException, NoSuchElementException
-from selenium.webdriver.common.proxy import Proxy, ProxyType
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
 import undetected_chromedriver as uc
 from bs4 import BeautifulSoup
 import time
@@ -19,10 +12,8 @@ import random
 import requests
 import os
 from dotenv import load_dotenv
-import json
 import re
-import traceback
-import sys
+from datetime import datetime
 
 class Scraper:
     def __init__(self):
@@ -103,6 +94,8 @@ class Scraper:
         df = pd.DataFrame(self.result_ids)
         df.to_excel(f'ids/ids_{self.surname_number}.xlsx', index=False)
     def start_get_ids(self):
+        start_time = datetime.now()
+        print("🔄 Start time:", start_time.strftime("%Y-%m-%d %H:%M:%S"))
         self.driver = self.get_driver_wire()
         self.wait = WebDriverWait(self.driver, 10)
         self.surnames = self.get_surnames()
@@ -148,6 +141,13 @@ class Scraper:
                                 "id": id_cell.get_text(strip=True),
                                 "surname": surname,
                             })
+
+        end_time = datetime.now()
+        print("\n✅ End time:", end_time.strftime("%Y-%m-%d %H:%M:%S"))
+        duration = end_time - start_time
+        print(f"⏱ Duration: {duration}")
+        print(f"🧾 Total surnames processed: {len(self.surnames)}")
+        print(f"🆔 Total IDs collected: {len(self.result_ids)}")
     def start_get_detail(self):
         self.ids = self.get_ids()
         
