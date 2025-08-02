@@ -1,0 +1,142 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <title>FNOMCeO Anagrafica | Ricerca Professionista</title>
+        
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" integrity="sha384-xewr6kSkq3dBbEtB6Z/3oFZmknWn7nHqhLVLrYgzEFRbU/DHSxW7K3B44yWUN60D" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.bootstrap4.min.css" integrity="sha256-LpykTdjMm+jVLpDWiYOkH8bYiithb4gajMYnIngj128=" crossorigin="anonymous" />
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap">
+        <link rel="stylesheet" href="assets/font/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/custom.css" media="all">
+        
+    </head>
+    <body>
+        <div class="container pt-1 pb-1 d-print-none">
+            <img src="assets/images/logo-fnomceo.png" height="92" class="d-inline-block align-top" alt="logo">
+        </div>
+        
+        <div class="container-fluid d-print-none">
+            <hr class="mt-0"/>
+        </div>
+        
+        <div class="inner-backgroud d-print-none">
+            <div class="container">
+                <h2 class="pt-4 pb-4 text-white">Elenco professionisti trovati</h2>
+            </div>
+        </div>
+        
+        <div class="container d-print-none">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="nav">
+                        <a class="nav-link" href="index.php">Nuova ricerca</a>
+                        <a class="nav-link disabled" href="#">&gt;&nbsp;&nbsp;&nbsp;Elenco professionisti trovati</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="row">
+		<div class="col-md-12 pt-4">
+		    <textarea style="display: none;" name="debug-textarea">[{"id":195978,"cognome":"AABAS","nome":"AAKEEL","comuneNascita":"IRAQ","localitNascita":"BAGDAD","provinciaNascita":"ESTERO","provinciaNascitaSigla":"EE","dataNascita":"20/02/1966","ordineAttuale":"Ordine della Provincia di UDINE","provinciaOrdineAttuale":"UD","isMultipleRegistration":false,"provvedimenti":[]}]  </textarea>
+		    <textarea style="display: none;" name="debug-textarea-prof">Array  </textarea>
+                                            <table id="dataTableID" class="table table-sm table-hover" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>&sharp;</th>
+                                    <th class="small font-weight-bold">Cognome</th>
+                                    <th class="small font-weight-bold">Nome</th>
+                                    <th class="small font-weight-bold">Data e luogo di nascita</th>
+                                    <th class="small font-weight-bold">Ordine attuale</th>
+                                    <!-- <th></th> -->
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                                                                                    <tr style="cursor: pointer;" class="row-hover" title="vedi dettaglio professionista">
+                                        <td>195978</td>
+                                        <td class="small">AABAS</td>
+                                        <td class="small">AAKEEL</td>
+                                        <td class="small text-uppercase">20/02/1966 IRAQ (EE)</td>
+                                        <td class="small">
+                                            Ordine della Provincia di UDINE (UD)                                        </td>
+                                        <!-- <td class="small">
+                                                                                    </td> -->
+                                        <td class="small"><i class="fa fa-lg fa-search text-dark"></i></td>
+                                    </tr>
+                                                                                                </tbody>
+                        </table>
+                                    </div>
+            </div>
+        </div>
+        
+        <div class="container-fluid d-print-none">
+            <hr />
+        </div>
+        
+        <div class="container d-print-none">
+            <div class="small text-muted">
+                <p>
+                    La ricerca dei Medici e degli Odontoiatri effettuata con questo servizio &egrave; realizzata sui dati comunicati 
+                    dagli Ordini Provinciali i quali, in quanto titolari degli stessi, sono tenuti al loro aggiornamento.
+                </p>
+                <p>
+                    <b>N.B. Qualsiasi variazione da apportare sulla scheda anagrafica deve essere richiesta all'Ordine detentore 
+                        dell'Albo di iscrizione gestore dei dati e dell'aggiornamento degli iscritti.</b>
+                </p>
+                <p>
+                    La FNOMCeO ha <u>solo</u> il ruolo di renderli disponibili attraverso il presente servizio di ricerca a chiunque intenda, 
+                    ad esempio, verificare l'iscrizione all'albo di un professionista.
+                </p>
+                <p>
+                    Il servizio ricerca &egrave; realizzato nel rispetto delle indicazioni riportate:
+                    <ul>
+                        <li>all'art.1 DPR n.221 del 5 aprile 1950</li>
+                        <li>all'art.3 DPR del 7 agosto 2012 che d&agrave; attuazione all'art 3 comma 5 del decreto legge n. 138 del 13 agosto 2011 convertito in legge n. 148 del 14 settembre 2011</li>
+                    </ul>
+                </p>
+                <p>
+                    Si fa presente altres&igrave; che:
+                    <ul>
+                        <li>la data di iscrizione all'Ordine provinciale &egrave; riferita alla situazione attuale e non alla data di 1&ring; iscrizione;</li>
+                        <li>professionisti in fase di trasferimento non sono visualizzati.</li>
+                    </ul>
+                </p>
+                <p>
+                    Tutto il materiale &egrave; protetto da copyright. 
+                    L'uso &egrave; consentito esclusivamente per fini personali e non commerciali. 
+                    &Egrave; fatto, pertanto, divieto di copiare, modificare, scaricare, trasmettere, pubblicare o distribuire a terzi per scopi di lucro o commerciali il contenuto del sito.
+                </p>
+                <p>
+                    Accedendo alla consultazione di quest'Albo si accettano le regole predette. 
+                </p>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="professionistaModalDialog" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content"></div>
+            </div>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/jquery.dataTables.min.js" integrity="sha256-qcV1wr+bn4NoBtxYqghmy1WIBvxeoe8vQlCowLG+cng=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/dataTables.bootstrap4.min.js" integrity="sha256-PahDJkda1lmviWgqffy4CcrECIFPJCWoa9EAqVx7Tf8=" crossorigin="anonymous"></script>
+        
+        <script src="assets/js/elenco.js"></script>
+    </body>
+</html>
+
