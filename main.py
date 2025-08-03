@@ -255,4 +255,3 @@ except Exception as e:
 finally:
     scraper.export_ids_excel()
     #scraper.export_results_excel()
-    scraper.delay(60,70)
