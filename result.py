@@ -161,12 +161,16 @@ class Scraper:
                 "Referer": "https://portale.fnomceo.it/cerca-prof/",
                 "Origin": "https://portale.fnomceo.it"
             }
-
-            response = requests.post(url, data=payload, headers=headers)
-            # If request successful
-            if not response.status_code == 200:
-                print(f"❌ Request failed with status: {response.status_code}")
-                break
+            retry = 0
+            while True:
+                response = requests.post(url, data=payload, headers=headers)
+                # If request successful
+                if response.status_code == 200 or retry == 3:
+                    break
+                else:
+                    retry += 1
+                    print(f"❌ Request failed with status: {response.status_code}")
+                    self.delay(3,5)
                 
             html = response.text
             soup = BeautifulSoup(html, "html.parser")
