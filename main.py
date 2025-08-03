@@ -114,10 +114,10 @@ class Scraper:
             time.sleep(1)  # Optional short wait before checking requests
 
             elenco_html = None
-            start_time = time.time()
+            start_time_try_surname = time.time()
             timeout = 10  # seconds
 
-            while time.time() - start_time < timeout:
+            while time.time() - start_time_try_surname < timeout:
                 for request in reversed(self.driver.requests):
                     if request.response and "elenco.php" in request.url:
                         elenco_html = request.response.body.decode('utf-8', errors='replace')
