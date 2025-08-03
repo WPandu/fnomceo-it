@@ -94,8 +94,6 @@ class Scraper:
         df = pd.DataFrame(self.result_ids)
         df.to_excel(f'ids/ids_{self.surname_number}.xlsx', index=False)
     def start_get_ids(self):
-        start_time = datetime.now()
-        print("🔄 Start time:", start_time.strftime("%Y-%m-%d %H:%M:%S"))
         self.driver = self.get_driver_wire()
         self.wait = WebDriverWait(self.driver, 10)
         self.surnames = self.get_surnames()
@@ -142,18 +140,12 @@ class Scraper:
                                 "surname": surname,
                             })
 
-        end_time = datetime.now()
-        print("\n✅ End time:", end_time.strftime("%Y-%m-%d %H:%M:%S"))
-        duration = end_time - start_time
-        print(f"⏱ Duration: {duration}")
-        print(f"🧾 Total surnames processed: {len(self.surnames)}")
         print(f"🆔 Total IDs collected: {len(self.result_ids)}")
     def start_get_detail(self):
         self.ids = self.get_ids()
         
         for index, id in enumerate(self.ids):
             print("Row: ", index+1)
-            print("ID: ", id["id"])
             url = "https://portale.fnomceo.it/cerca-prof/dettaglio.php"
             payload = {
                 "id": id["id"]
@@ -192,7 +184,6 @@ class Scraper:
             # Get and clean the text
             if title_tag:
                 name = title_tag.get_text(strip=True)
-                print("Name:", name)
             else:
                 print("Name not found")
 
@@ -245,13 +236,22 @@ class Scraper:
                 "surname": id["surname"],
                 "id": id["id"],
             })
+        
+        print(f"🆔 Total Result collected: {len(self.results)}")
 
 scraper = Scraper()
+start_time = datetime.now()
+
 try:
-    scraper.start_get_ids()
-    #scraper.start_get_detail()
+    #scraper.start_get_ids()
+    scraper.start_get_detail()
 except Exception as e:
     print(f"An error occurred: {e}")
 finally:
-    scraper.export_ids_excel()
-    #scraper.export_results_excel()
+    #scraper.export_ids_excel()
+    scraper.export_results_excel()
+    end_time = datetime.now()
+    print("🔄 Start time:", start_time.strftime("%Y-%m-%d %H:%M:%S"))
+    print("\n✅ End time:", end_time.strftime("%Y-%m-%d %H:%M:%S"))
+    duration = end_time - start_time
+    print(f"⏱ Duration: {duration}")
