@@ -243,13 +243,13 @@ scraper = Scraper()
 start_time = datetime.now()
 
 try:
-    scraper.start_get_ids()
-    #scraper.start_get_detail()
+    #scraper.start_get_ids()
+    scraper.start_get_detail()
 except Exception as e:
     print(f"An error occurred: {e}")
 finally:
-    scraper.export_ids_excel()
-    #scraper.export_results_excel()
+    #scraper.export_ids_excel()
+    scraper.export_results_excel()
     end_time = datetime.now()
     print("🔄 Start time:", start_time.strftime("%Y-%m-%d %H:%M:%S"))
     print("\n✅ End time:", end_time.strftime("%Y-%m-%d %H:%M:%S"))
