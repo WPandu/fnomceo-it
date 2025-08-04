@@ -51,8 +51,14 @@ class Scraper:
         #options.add_argument("--headless")  # 👉 Run browser in headless mode
         #options.add_argument("--disable-gpu")  # Optional: helps on Windows
         options.add_argument("--window-size=1920,1080")  # Optional: simulate full HD
-
-        driver = webdriver.Chrome(options=options)
+        seleniumwire_options = {
+            'proxy': {
+                'http': f'http://24a29d31ad7d0e49f9af:aa0987b5412447d1@gw.dataimpulse.com:823',
+                'https': f'https://24a29d31ad7d0e49f9af:aa0987b5412447d1@gw.dataimpulse.com:823',
+                'no_proxy': 'localhost,127.0.0.1'  # Bypass proxy for local connections
+            }
+        }
+        driver = webdriver.Chrome(options=options, seleniumwire_options=seleniumwire_options)
         return driver
     def get_chunk_surnames_filepath(self):
         chunk_file = f'./data/surnames_{self.surname_number}.xlsx'
