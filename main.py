@@ -174,15 +174,20 @@ class Scraper:
             }
             
             retry = 0
-            while True:
-                response = requests.post(url, data=payload, headers=headers, proxies=proxies)
-                # If request successful
-                if response.status_code == 200 or retry == 3:
-                    break
-                else:
-                    retry += 1
-                    print(f"❌ Request failed with status: {response.status_code}")
-                    self.delay(3,5)
+            while retry < 3:
+                try:
+                    response = requests.post(url, data=payload, headers=headers, proxies=proxies, timeout=10)
+                    if response.status_code == 200:
+                        break
+                    else:
+                        print(f"❌ Status {response.status_code}, retrying...")
+                except requests.exceptions.ProxyError as e:
+                    print("⚠ Proxy error:", e)
+                except requests.exceptions.RequestException as e:
+                    print("⚠ Request failed:", e)
+
+                retry += 1
+                self.delay(2,3)
                 
             html = response.text
             soup = BeautifulSoup(html, "html.parser")
@@ -259,13 +264,12 @@ scraper = Scraper()
 start_time = datetime.now()
 
 try:
-    scraper.start_get_ids()
-    #scraper.start_get_detail()
+    scraper.start_get_detail()
 except Exception as e:
     print(f"An error occurred: {e}")
 finally:
-    scraper.export_ids_excel()
-    #scraper.export_results_excel()
+    scraper.export_results_excel()
+    scraper.get_chunk_ids_filepath()
     end_time = datetime.now()
     print("🔄 Start time:", start_time.strftime("%Y-%m-%d %H:%M:%S"))
     print("✅ End time:", end_time.strftime("%Y-%m-%d %H:%M:%S"))
