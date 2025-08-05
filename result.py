@@ -51,8 +51,14 @@ class Scraper:
         #options.add_argument("--headless")  # 👉 Run browser in headless mode
         #options.add_argument("--disable-gpu")  # Optional: helps on Windows
         options.add_argument("--window-size=1920,1080")  # Optional: simulate full HD
-
-        driver = webdriver.Chrome(options=options)
+        seleniumwire_options = {
+            'proxy': {
+                'http': f'http://24a29d31ad7d0e49f9af:aa0987b5412447d1@gw.dataimpulse.com:823',
+                'https': f'https://24a29d31ad7d0e49f9af:aa0987b5412447d1@gw.dataimpulse.com:823',
+                'no_proxy': 'localhost,127.0.0.1'  # Bypass proxy for local connections
+            }
+        }
+        driver = webdriver.Chrome(options=options, seleniumwire_options=seleniumwire_options)
         return driver
     def get_chunk_surnames_filepath(self):
         chunk_file = f'./data/surnames_{self.surname_number}.xlsx'
@@ -142,6 +148,22 @@ class Scraper:
 
         print(f"🆔 Total IDs collected: {len(self.result_ids)}")
     def start_get_detail(self):
+        proxies = {
+            "http": f"http://24a29d31ad7d0e49f9af:aa0987b5412447d1@gw.dataimpulse.com:823",
+            "https": f"http://24a29d31ad7d0e49f9af:aa0987b5412447d1@gw.dataimpulse.com:823"
+        }
+
+        headers = {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/115.0.0.0 Safari/537.36"
+            ),
+            "Referer": "https://portale.fnomceo.it/cerca-prof/",
+            "Origin": "https://portale.fnomceo.it"
+        }
+
         self.ids = self.get_ids()
         
         for index, id in enumerate(self.ids):
@@ -150,20 +172,10 @@ class Scraper:
             payload = {
                 "id": id["id"]
             }
-
-            headers = {
-                "Content-Type": "application/x-www-form-urlencoded",
-                "User-Agent": (
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                    "AppleWebKit/537.36 (KHTML, like Gecko) "
-                    "Chrome/115.0.0.0 Safari/537.36"
-                ),
-                "Referer": "https://portale.fnomceo.it/cerca-prof/",
-                "Origin": "https://portale.fnomceo.it"
-            }
+            
             retry = 0
             while True:
-                response = requests.post(url, data=payload, headers=headers)
+                response = requests.post(url, data=payload, headers=headers, proxies=proxies)
                 # If request successful
                 if response.status_code == 200 or retry == 3:
                     break
@@ -247,15 +259,13 @@ scraper = Scraper()
 start_time = datetime.now()
 
 try:
-    #scraper.start_get_ids()
     scraper.start_get_detail()
 except Exception as e:
     print(f"An error occurred: {e}")
 finally:
-    #scraper.export_ids_excel()
     scraper.export_results_excel()
     end_time = datetime.now()
     print("🔄 Start time:", start_time.strftime("%Y-%m-%d %H:%M:%S"))
-    print("\n✅ End time:", end_time.strftime("%Y-%m-%d %H:%M:%S"))
+    print("✅ End time:", end_time.strftime("%Y-%m-%d %H:%M:%S"))
     duration = end_time - start_time
     print(f"⏱ Duration: {duration}")

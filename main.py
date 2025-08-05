@@ -148,6 +148,22 @@ class Scraper:
 
         print(f"🆔 Total IDs collected: {len(self.result_ids)}")
     def start_get_detail(self):
+        proxies = {
+            "http": f"http://24a29d31ad7d0e49f9af:aa0987b5412447d1@gw.dataimpulse.com:823",
+            "https": f"http://24a29d31ad7d0e49f9af:aa0987b5412447d1@gw.dataimpulse.com:823"
+        }
+
+        headers = {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/115.0.0.0 Safari/537.36"
+            ),
+            "Referer": "https://portale.fnomceo.it/cerca-prof/",
+            "Origin": "https://portale.fnomceo.it"
+        }
+
         self.ids = self.get_ids()
         
         for index, id in enumerate(self.ids):
@@ -156,20 +172,10 @@ class Scraper:
             payload = {
                 "id": id["id"]
             }
-
-            headers = {
-                "Content-Type": "application/x-www-form-urlencoded",
-                "User-Agent": (
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                    "AppleWebKit/537.36 (KHTML, like Gecko) "
-                    "Chrome/115.0.0.0 Safari/537.36"
-                ),
-                "Referer": "https://portale.fnomceo.it/cerca-prof/",
-                "Origin": "https://portale.fnomceo.it"
-            }
+            
             retry = 0
             while True:
-                response = requests.post(url, data=payload, headers=headers)
+                response = requests.post(url, data=payload, headers=headers, proxies=proxies)
                 # If request successful
                 if response.status_code == 200 or retry == 3:
                     break
